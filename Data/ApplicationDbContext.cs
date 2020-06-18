@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Capstone_Proj.Models;
 
 namespace Capstone_Proj.Data
 {
@@ -43,5 +44,7 @@ namespace Capstone_Proj.Data
                 }
                 );
         }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 }
