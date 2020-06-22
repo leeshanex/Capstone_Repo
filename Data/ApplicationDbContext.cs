@@ -49,5 +49,6 @@ namespace Capstone_Proj.Data
         public DbSet<Account> Accounts { get; set; }
         public DbSet<AreaOfExpertise> Spots { get; set; }
         public DbSet<FishingTrip> FishingTrips { get; set; }
+        public DbSet<Inbox> Inboxes { get; set; }
     }
 }
