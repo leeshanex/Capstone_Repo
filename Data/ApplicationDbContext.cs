@@ -30,8 +30,8 @@ namespace Capstone_Proj.Data
                 .HasData(
                 new IdentityRole
                 {
-                    Name = "Employee",
-                    NormalizedName = "EMPLOYEE"
+                    Name = "Guide",
+                    NormalizedName = "GUIDE"
                 }
                 );
             base.OnModelCreating(builder);
@@ -45,6 +45,6 @@ namespace Capstone_Proj.Data
                 );
         }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Guide> Guides { get; set; }
     }
 }

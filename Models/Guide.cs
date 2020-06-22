@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Capstone_Proj.Models
 {
-    public class Employee
+    public class Guide
     {
         [Key]
-        public int EmployeeId { get; set; }
+        public int GuideId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 

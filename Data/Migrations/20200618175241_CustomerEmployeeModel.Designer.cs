@@ -4,14 +4,16 @@ using Capstone_Proj.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Capstone_Proj.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200618175241_CustomerEmployeeModel")]
+    partial class CustomerEmployeeModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,9 +44,9 @@ namespace Capstone_Proj.Data.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("Capstone_Proj.Models.Guide", b =>
+            modelBuilder.Entity("Capstone_Proj.Models.Employee", b =>
                 {
-                    b.Property<int>("GuideId")
+                    b.Property<int>("EmployeeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -58,11 +60,11 @@ namespace Capstone_Proj.Data.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("GuideId");
+                    b.HasKey("EmployeeId");
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Guides");
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -94,22 +96,22 @@ namespace Capstone_Proj.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b40762a2-6765-4b49-9346-664a2e491645",
-                            ConcurrencyStamp = "7085f64a-8d7f-4297-8128-1e12b0b9c62b",
+                            Id = "0bda5a92-faf8-45ee-a826-1426313aebae",
+                            ConcurrencyStamp = "4626980e-437b-4ac9-9783-b4b3c0b13f04",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "33694ade-b9a4-4106-be26-0649bbaef54d",
-                            ConcurrencyStamp = "d1203827-2e81-42d2-a181-d03a23534702",
-                            Name = "Guide",
-                            NormalizedName = "GUIDE"
+                            Id = "830ea2d8-c527-4b02-baf5-119d3fd885ca",
+                            ConcurrencyStamp = "26869133-92b6-4bce-90a8-5f92ed5e70cd",
+                            Name = "Employee",
+                            NormalizedName = "EMPLOYEE"
                         },
                         new
                         {
-                            Id = "2e7c1b2a-a5d8-4df7-bf4b-5572e8c8d5ea",
-                            ConcurrencyStamp = "ac90cfea-2593-48df-bf5c-92c99d771b99",
+                            Id = "7f489caa-99a0-46d8-a094-d0583b8d934a",
+                            ConcurrencyStamp = "c576be08-3ea9-47c8-847e-ee56acc9a9fa",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -291,7 +293,7 @@ namespace Capstone_Proj.Data.Migrations
                         .HasForeignKey("IdentityUserId");
                 });
 
-            modelBuilder.Entity("Capstone_Proj.Models.Guide", b =>
+            modelBuilder.Entity("Capstone_Proj.Models.Employee", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()

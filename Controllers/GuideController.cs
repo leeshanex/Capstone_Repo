@@ -10,23 +10,23 @@ using Capstone_Proj.Models;
 
 namespace Capstone_Proj.Controllers
 {
-    public class EmployeeController : Controller
+    public class GuideController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public EmployeeController(ApplicationDbContext context)
+        public GuideController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Employee
+        // GET: Guide
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Employees.Include(e => e.IdentityUser);
+            var applicationDbContext = _context.Guides.Include(g => g.IdentityUser);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Employee/Details/5
+        // GET: Guide/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +34,42 @@ namespace Capstone_Proj.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees
-                .Include(e => e.IdentityUser)
-                .FirstOrDefaultAsync(m => m.EmployeeId == id);
-            if (employee == null)
+            var guide = await _context.Guides
+                .Include(g => g.IdentityUser)
+                .FirstOrDefaultAsync(m => m.GuideId == id);
+            if (guide == null)
             {
                 return NotFound();
             }
 
-            return View(employee);
+            return View(guide);
         }
 
-        // GET: Employee/Create
+        // GET: Guide/Create
         public IActionResult Create()
         {
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
-        // POST: Employee/Create
+        // POST: Guide/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmployeeId,FirstName,LastName,IdentityUserId")] Employee employee)
+        public async Task<IActionResult> Create([Bind("CustomerId,FirstName,LastName,IdentityUserId")] Guide guide)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(employee);
+                _context.Add(guide);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employee.IdentityUserId);
-            return View(employee);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", guide.IdentityUserId);
+            return View(guide);
         }
 
-        // GET: Employee/Edit/5
+        // GET: Guide/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +77,23 @@ namespace Capstone_Proj.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees.FindAsync(id);
-            if (employee == null)
+            var guide = await _context.Guides.FindAsync(id);
+            if (guide == null)
             {
                 return NotFound();
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employee.IdentityUserId);
-            return View(employee);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", guide.IdentityUserId);
+            return View(guide);
         }
 
-        // POST: Employee/Edit/5
+        // POST: Guide/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EmployeeId,FirstName,LastName,IdentityUserId")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("CustomerId,FirstName,LastName,IdentityUserId")] Guide guide)
         {
-            if (id != employee.EmployeeId)
+            if (id != guide.GuideId)
             {
                 return NotFound();
             }
@@ -102,12 +102,12 @@ namespace Capstone_Proj.Controllers
             {
                 try
                 {
-                    _context.Update(employee);
+                    _context.Update(guide);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EmployeeExists(employee.EmployeeId))
+                    if (!GuideExists(guide.GuideId))
                     {
                         return NotFound();
                     }
@@ -118,11 +118,11 @@ namespace Capstone_Proj.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employee.IdentityUserId);
-            return View(employee);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", guide.IdentityUserId);
+            return View(guide);
         }
 
-        // GET: Employee/Delete/5
+        // GET: Guide/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,31 +130,31 @@ namespace Capstone_Proj.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees
-                .Include(e => e.IdentityUser)
-                .FirstOrDefaultAsync(m => m.EmployeeId == id);
-            if (employee == null)
+            var guide = await _context.Guides
+                .Include(g => g.IdentityUser)
+                .FirstOrDefaultAsync(m => m.GuideId == id);
+            if (guide == null)
             {
                 return NotFound();
             }
 
-            return View(employee);
+            return View(guide);
         }
 
-        // POST: Employee/Delete/5
+        // POST: Guide/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var employee = await _context.Employees.FindAsync(id);
-            _context.Employees.Remove(employee);
+            var guide = await _context.Guides.FindAsync(id);
+            _context.Guides.Remove(guide);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EmployeeExists(int id)
+        private bool GuideExists(int id)
         {
-            return _context.Employees.Any(e => e.EmployeeId == id);
+            return _context.Guides.Any(e => e.GuideId == id);
         }
     }
 }

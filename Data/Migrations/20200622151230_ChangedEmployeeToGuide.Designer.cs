@@ -4,14 +4,16 @@ using Capstone_Proj.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Capstone_Proj.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200622151230_ChangedEmployeeToGuide")]
+    partial class ChangedEmployeeToGuide
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,7 +46,7 @@ namespace Capstone_Proj.Data.Migrations
 
             modelBuilder.Entity("Capstone_Proj.Models.Guide", b =>
                 {
-                    b.Property<int>("GuideId")
+                    b.Property<int>("CustomerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -58,7 +60,7 @@ namespace Capstone_Proj.Data.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("GuideId");
+                    b.HasKey("CustomerId");
 
                     b.HasIndex("IdentityUserId");
 
@@ -94,22 +96,22 @@ namespace Capstone_Proj.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b40762a2-6765-4b49-9346-664a2e491645",
-                            ConcurrencyStamp = "7085f64a-8d7f-4297-8128-1e12b0b9c62b",
+                            Id = "f1f75ece-f95f-4250-b9e3-4c77ba5680e5",
+                            ConcurrencyStamp = "b1537e0a-1bd1-499d-8c58-4be049a837be",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "33694ade-b9a4-4106-be26-0649bbaef54d",
-                            ConcurrencyStamp = "d1203827-2e81-42d2-a181-d03a23534702",
+                            Id = "afa17dec-9ca0-4f42-aafe-fc5d40627805",
+                            ConcurrencyStamp = "dd2db911-76f7-4991-be39-b2db607d384a",
                             Name = "Guide",
                             NormalizedName = "GUIDE"
                         },
                         new
                         {
-                            Id = "2e7c1b2a-a5d8-4df7-bf4b-5572e8c8d5ea",
-                            ConcurrencyStamp = "ac90cfea-2593-48df-bf5c-92c99d771b99",
+                            Id = "13872728-794a-491a-901a-8429e3edac09",
+                            ConcurrencyStamp = "9e138e76-6f95-48db-94a3-f85495df0cb0",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
