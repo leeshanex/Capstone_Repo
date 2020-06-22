@@ -48,5 +48,6 @@ namespace Capstone_Proj.Data
         public DbSet<Guide> Guides { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<AreaOfExpertise> Spots { get; set; }
+        public DbSet<FishingTrip> FishingTrips { get; set; }
     }
 }
