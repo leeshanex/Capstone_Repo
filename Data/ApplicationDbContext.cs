@@ -46,5 +46,6 @@ namespace Capstone_Proj.Data
         }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Guide> Guides { get; set; }
+        public DbSet<Account> Accounts { get; set; }
     }
 }
