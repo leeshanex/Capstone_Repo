@@ -52,5 +52,6 @@ namespace Capstone_Proj.Data
         public DbSet<Inbox> Inboxes { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Rating> Ratings { get; set; }
+        public DbSet<Review> Reviews { get; set; }
     }
 }

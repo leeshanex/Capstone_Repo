@@ -10,23 +10,23 @@ using Capstone_Proj.Models;
 
 namespace Capstone_Proj.Controllers
 {
-    public class RatingController : Controller
+    public class ReviewController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public RatingController(ApplicationDbContext context)
+        public ReviewController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Rating
+        // GET: Review
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Ratings.Include(r => r.Customer);
+            var applicationDbContext = _context.Reviews.Include(r => r.Customer);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Rating/Details/5
+        // GET: Review/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +34,42 @@ namespace Capstone_Proj.Controllers
                 return NotFound();
             }
 
-            var rating = await _context.Ratings
+            var review = await _context.Reviews
                 .Include(r => r.Customer)
-                .FirstOrDefaultAsync(m => m.RatingId == id);
-            if (rating == null)
+                .FirstOrDefaultAsync(m => m.ReviewId == id);
+            if (review == null)
             {
                 return NotFound();
             }
 
-            return View(rating);
+            return View(review);
         }
 
-        // GET: Rating/Create
+        // GET: Review/Create
         public IActionResult Create()
         {
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId");
             return View();
         }
 
-        // POST: Rating/Create
+        // POST: Review/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RatingId,CustomerRatings,CustomerId")] Rating rating)
+        public async Task<IActionResult> Create([Bind("ReviewId,CustomerReviews,CustomerId")] Review review)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(rating);
+                _context.Add(review);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId", rating.CustomerId);
-            return View(rating);
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId", review.CustomerId);
+            return View(review);
         }
 
-        // GET: Rating/Edit/5
+        // GET: Review/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +77,23 @@ namespace Capstone_Proj.Controllers
                 return NotFound();
             }
 
-            var rating = await _context.Ratings.FindAsync(id);
-            if (rating == null)
+            var review = await _context.Reviews.FindAsync(id);
+            if (review == null)
             {
                 return NotFound();
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId", rating.CustomerId);
-            return View(rating);
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId", review.CustomerId);
+            return View(review);
         }
 
-        // POST: Rating/Edit/5
+        // POST: Review/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RatingId,CustomerRatings,CustomerId")] Rating rating)
+        public async Task<IActionResult> Edit(int id, [Bind("ReviewId,CustomerReviews,CustomerId")] Review review)
         {
-            if (id != rating.RatingId)
+            if (id != review.ReviewId)
             {
                 return NotFound();
             }
@@ -102,12 +102,12 @@ namespace Capstone_Proj.Controllers
             {
                 try
                 {
-                    _context.Update(rating);
+                    _context.Update(review);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RatingExists(rating.RatingId))
+                    if (!ReviewExists(review.ReviewId))
                     {
                         return NotFound();
                     }
@@ -118,43 +118,43 @@ namespace Capstone_Proj.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId", rating.CustomerId);
-            return View(rating);
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId", review.CustomerId);
+            return View(review);
         }
 
-        // GET: Rating/Delete/5
+        // GET: Review/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var rating = await _context.Ratings
+            
+            var review = await _context.Reviews
                 .Include(r => r.Customer)
-                .FirstOrDefaultAsync(m => m.RatingId == id);
-            if (rating == null)
+                .FirstOrDefaultAsync(m => m.ReviewId == id);
+            if (review == null)
             {
                 return NotFound();
             }
 
-            return View(rating);
+            return View(review);
         }
 
-        // POST: Rating/Delete/5
+        // POST: Review/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var rating = await _context.Ratings.FindAsync(id);
-            _context.Ratings.Remove(rating);
+            var review = await _context.Reviews.FindAsync(id);
+            _context.Reviews.Remove(review);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RatingExists(int id)
+        private bool ReviewExists(int id)
         {
-            return _context.Ratings.Any(e => e.RatingId == id);
+            return _context.Reviews.Any(e => e.ReviewId == id);
         }
     }
 }
