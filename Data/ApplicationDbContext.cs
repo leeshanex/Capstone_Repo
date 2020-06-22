@@ -51,5 +51,6 @@ namespace Capstone_Proj.Data
         public DbSet<FishingTrip> FishingTrips { get; set; }
         public DbSet<Inbox> Inboxes { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
     }
 }

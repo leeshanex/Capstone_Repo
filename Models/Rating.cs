@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Capstone_Proj.Models
 {
-    public class Ratings
+    public class Rating
     {
         [Key]
         public int RatingId { get; set; }

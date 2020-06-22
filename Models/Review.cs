@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Capstone_Proj.Models
 {
-    public class Reviews
+    public class Review
     {
         [Key]
         public int ReviewId { get; set; }
