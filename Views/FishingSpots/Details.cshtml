@@ -1,0 +1,30 @@
+﻿@model Capstone_Proj.Models.AreaOfExpertise
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>AreaOfExpertise</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PinLocation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PinLocation)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Guide)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Guide.GuideId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.AreaId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

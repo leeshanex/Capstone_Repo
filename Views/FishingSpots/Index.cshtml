@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Capstone_Proj.Models.AreaOfExpertise>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PinLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Guide)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PinLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Guide.GuideId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AreaId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AreaId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AreaId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
