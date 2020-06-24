@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Capstone_Proj.Data;
 using Capstone_Proj.Models;
+using System.Security.Claims;
+using Microsoft.VisualBasic;
 
 namespace Capstone_Proj.Controllers
 {
@@ -22,8 +24,10 @@ namespace Capstone_Proj.Controllers
         // GET: Customer
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Customers.Include(c => c.IdentityUser);
-            return View(await applicationDbContext.ToListAsync());
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInCustomer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefaultAsync();
+            
+            return View(await loggedInCustomer);
         }
 
         // GET: Customer/Details/5
@@ -34,22 +38,24 @@ namespace Capstone_Proj.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers
-                .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
-            if (customer == null)
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInCustomer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefaultAsync();
+          
+            if (loggedInCustomer == null)
             {
                 return NotFound();
             }
 
-            return View(customer);
+            return View(await loggedInCustomer);
         }
 
         // GET: Customer/Create
         public IActionResult Create()
         {
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
-            return View();
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInCustomer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            
+            return View(loggedInCustomer);
         }
 
         // POST: Customer/Create
@@ -61,9 +67,11 @@ namespace Capstone_Proj.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                customer.IdentityUserId = userId;
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details");
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             return View(customer);
@@ -77,13 +85,14 @@ namespace Capstone_Proj.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers.FindAsync(id);
-            if (customer == null)
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInCustomer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefaultAsync();
+            if (loggedInCustomer == null)
             {
                 return NotFound();
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
-            return View(customer);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", loggedInCustomer);
+            return View(await loggedInCustomer);
         }
 
         // POST: Customer/Edit/5
@@ -102,7 +111,10 @@ namespace Capstone_Proj.Controllers
             {
                 try
                 {
-                    _context.Update(customer);
+                    var customerInDB = _context.Customers.Single(c => c.CustomerId == customer.CustomerId);
+                    //customerInDB.LevelOfFishing = customer.LevelOfFishing;
+                    //customerInDB.TargetedSpecies = customer.TargetedSpecies;
+                    _context.Update(customerInDB);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -116,7 +128,7 @@ namespace Capstone_Proj.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Customers");
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             return View(customer);

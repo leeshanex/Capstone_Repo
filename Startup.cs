@@ -16,6 +16,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Capstone_Proj.ActionFilters;
 using Capstone_Proj.Services;
+using Capstone_Proj.Interfaces;
 
 namespace Capstone_Proj
 {
@@ -44,7 +45,7 @@ namespace Capstone_Proj
             services.AddRazorPages();
             services.AddTransient<LocationService>();
 services.AddTransient<ScheduleService>();
-           services.AddTransient<WeatherService>();
+           services.AddTransient<IWeatherServices, WeatherService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

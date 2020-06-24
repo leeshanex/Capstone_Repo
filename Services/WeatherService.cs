@@ -1,4 +1,6 @@
-﻿using Capstone_Proj.Interfaces;
+﻿using Capstone_Proj.APIKeys;
+using Capstone_Proj.Interfaces;
+using Capstone_Proj.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,23 +16,28 @@ namespace Capstone_Proj.Services
         {
 
         }
-        //public async Task<> GetCurrentWeather()
-        //{
-        //    HttpRequestMessage request = new HttpRequestMessage();
-        //    string url = $"";
-        //    HttpClient client = new HttpClient();
-        //    client.DefaultRequestHeaders.Add("");
-        //    client.DefaultRequestHeaders.Add("", APIKeys.OpenMusicSearchKey);
+        public async Task<Weather> GetCurrentWeather()
+        {
+            HttpRequestMessage request = new HttpRequestMessage();
+            string userInput = "95833";
+            string postalCode = userInput;
+            string url = $"dataservice.accuweather.com/locations/v1/postalcodes/search?apikey={ApiKeys.OpenCurrentWeatherKey}=O&q={postalCode}";
+            HttpClient client = new HttpClient();
 
-        //    HttpResponseMessage response = await client.GetAsync(url);
+            HttpResponseMessage response = await client.GetAsync(url);
 
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        string json = await response.Content.ReadAsStringAsync();
-        //          = JsonConvert.DeserializeObject<>(json);
-        //        return ();
-        //    }
-        //    return null;
-        //}
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                 var currentWeather = JsonConvert.DeserializeObject<Weather>(json);
+                return (currentWeather);
+            }
+            return null;
+        }
+
+        Task<WeatherService> IWeatherServices.GetCurrentWeather()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
