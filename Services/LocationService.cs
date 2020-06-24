@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Capstone_Proj.Services
 {
-    public class GetLocationService
+    public class LocationService
     {
-        public GetLocationService()
+        public LocationService()
         {
 
         }

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Capstone_Proj.Services
 {
-    public class GetWeatherService
+    public class WeatherService
     {
-        public GetWeatherService()
+        public WeatherService()
         {
 
         }

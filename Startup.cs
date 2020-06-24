@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Capstone_Proj.ActionFilters;
+using Capstone_Proj.Services;
 
 namespace Capstone_Proj
 {
@@ -41,6 +42,9 @@ namespace Capstone_Proj
             services.AddControllers(config => { config.Filters.Add(typeof(GlobalRouting)); });
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddTransient<LocationService>();
+services.AddTransient<ScheduleService>();
+           services.AddTransient<WeatherService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
