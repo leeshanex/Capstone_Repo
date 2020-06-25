@@ -25,9 +25,9 @@ namespace Capstone_Proj.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var loggedInCustomer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefaultAsync();
+            var loggedInCustomer = await _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefaultAsync();
             
-            return View(await loggedInCustomer);
+            return View();
         }
 
         // GET: Customer/Details/5

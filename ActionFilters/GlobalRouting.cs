@@ -22,11 +22,11 @@ namespace Capstone_Proj.ActionFilters
             {
                 if (_claimsPrincipal.IsInRole("Customer"))
                 {
-                    context.Result = new RedirectToActionResult("Index", "Customers", null);
+                    context.Result = new RedirectToActionResult("Index", "Customer", null);
                 }
                 else if (_claimsPrincipal.IsInRole("Guide"))
                 {
-                    context.Result = new RedirectToActionResult("Index", "Guides", null);
+                    context.Result = new RedirectToActionResult("Index", "Guide", null);
                 }
             }
         }
