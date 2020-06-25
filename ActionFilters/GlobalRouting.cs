@@ -24,9 +24,9 @@ namespace Capstone_Proj.ActionFilters
                 {
                     context.Result = new RedirectToActionResult("Index", "Customers", null);
                 }
-                else if (_claimsPrincipal.IsInRole("Employee"))
+                else if (_claimsPrincipal.IsInRole("Guide"))
                 {
-                    context.Result = new RedirectToActionResult("Index", "Employees", null);
+                    context.Result = new RedirectToActionResult("Index", "Guides", null);
                 }
             }
         }

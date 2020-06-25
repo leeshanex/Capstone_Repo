@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Capstone_Proj.Data;
 using Capstone_Proj.Models;
+using System.Security.Claims;
 
 namespace Capstone_Proj.Controllers
 {
@@ -22,8 +23,10 @@ namespace Capstone_Proj.Controllers
         // GET: Guide
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Guides.Include(g => g.IdentityUser);
-            return View(await applicationDbContext.ToListAsync());
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInGuide = _context.Guides.Where(c => c.IdentityUserId == userId).SingleOrDefaultAsync();
+
+            return View(await loggedInGuide);
         }
 
         // GET: Guide/Details/5
@@ -34,22 +37,23 @@ namespace Capstone_Proj.Controllers
                 return NotFound();
             }
 
-            var guide = await _context.Guides
-                .Include(g => g.IdentityUser)
-                .FirstOrDefaultAsync(m => m.GuideId == id);
-            if (guide == null)
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInGuide = _context.Guides.Where(c => c.IdentityUserId == userId).SingleOrDefaultAsync();
+            if (loggedInGuide == null)
             {
                 return NotFound();
             }
 
-            return View(guide);
+            return View(await loggedInGuide);
         }
 
         // GET: Guide/Create
         public IActionResult Create()
         {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInGuide = _context.Guides.Where(c => c.IdentityUserId == userId).SingleOrDefault(); 
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
-            return View();
+            return View(loggedInGuide);
         }
 
         // POST: Guide/Create
@@ -61,9 +65,11 @@ namespace Capstone_Proj.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                guide.IdentityUserId = userId;
                 _context.Add(guide);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details");
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", guide.IdentityUserId);
             return View(guide);
@@ -77,13 +83,15 @@ namespace Capstone_Proj.Controllers
                 return NotFound();
             }
 
-            var guide = await _context.Guides.FindAsync(id);
-            if (guide == null)
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInGuide = _context.Guides.Where(c => c.IdentityUserId == userId).SingleOrDefaultAsync();
+
+            if (loggedInGuide == null)
             {
                 return NotFound();
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", guide.IdentityUserId);
-            return View(guide);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", loggedInGuide);
+            return View(await loggedInGuide);
         }
 
         // POST: Guide/Edit/5
@@ -102,7 +110,14 @@ namespace Capstone_Proj.Controllers
             {
                 try
                 {
-                    _context.Update(guide);
+                    var guideInDB = _context.Guides.Single(g => g.GuideId == guide.GuideId);
+                    //guideInDB.WaterType = guide.WaterType;
+                    //guideInDB.TargetedSpecies = guide.TargetedSpecies;
+                    //guideInDB.Title = guide.Title;
+                    //guideInDB.Rates = guide.Rates;
+                    //guideInDB.DayLength = guide.DayLength;
+
+                    _context.Update(guideInDB);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
