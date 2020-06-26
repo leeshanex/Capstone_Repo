@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,17 +6,18 @@ using Microsoft.EntityFrameworkCore;
 using Capstone_Proj.Data;
 using Capstone_Proj.Models;
 using System.Security.Claims;
-using Microsoft.VisualBasic;
+using Capstone_Proj.Services;
 
 namespace Capstone_Proj.Controllers
 {
     public class CustomerController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public CustomerController(ApplicationDbContext context)
+        private readonly WeatherService _weather;
+        public CustomerController(ApplicationDbContext context, WeatherService weather)
         {
             _context = context;
+            _weather = weather;
         }
 
         // GET: Customer
@@ -167,6 +166,12 @@ namespace Capstone_Proj.Controllers
         private bool CustomerExists(int id)
         {
             return _context.Customers.Any(e => e.CustomerId == id);
+        }
+
+        public async Task<IActionResult> WeatherForecast()
+        {
+            var weatherForecast = await _weather.GetWeatherForecast();
+            return View(weatherForecast);
         }
     }
 }

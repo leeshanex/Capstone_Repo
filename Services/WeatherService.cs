@@ -1,5 +1,4 @@
 ﻿using Capstone_Proj.APIKeys;
-using Capstone_Proj.Interfaces;
 using Capstone_Proj.Models;
 using Newtonsoft.Json;
 using System;
@@ -10,18 +9,16 @@ using System.Threading.Tasks;
 
 namespace Capstone_Proj.Services
 {
-    public class WeatherService : IWeatherServices
+    public class WeatherService
     {
         public WeatherService()
         {
 
         }
-        public async Task<Weather> GetCurrentWeather()
+        public async Task<WeatherForecast> GetWeatherForecast()
         {
-            HttpRequestMessage request = new HttpRequestMessage();
-            string userInput = "95833";
-            string postalCode = userInput;
-            string url = $"dataservice.accuweather.com/locations/v1/postalcodes/search?apikey={ApiKeys.OpenCurrentWeatherKey}=O&q={postalCode}";
+           
+            string url = $"http://dataservice.accuweather.com/forecasts/v1/daily/5day/40223_PC?apikey={ApiKeys.OpenWeatherKey}";
             HttpClient client = new HttpClient();
 
             HttpResponseMessage response = await client.GetAsync(url);
@@ -29,15 +26,17 @@ namespace Capstone_Proj.Services
             if (response.IsSuccessStatusCode)
             {
                 string json = await response.Content.ReadAsStringAsync();
-                 var currentWeather = JsonConvert.DeserializeObject<Weather>(json);
-                return (currentWeather);
+                WeatherForecast forecast = JsonConvert.DeserializeObject<WeatherForecast>(json);
+                
+                return forecast;
             }
-            return null;
+            else
+            {
+                return (null);
+            }
         }
 
-        Task<WeatherService> IWeatherServices.GetCurrentWeather()
-        {
-            throw new NotImplementedException();
-        }
+
+
     }
 }

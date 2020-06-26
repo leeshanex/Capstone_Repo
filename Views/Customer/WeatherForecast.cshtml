@@ -1,0 +1,35 @@
+﻿@model Capstone_Proj.Models.WeatherForecast
+
+@{
+    ViewData["Title"] = "WeatherForecast";
+}
+
+<h1>Weather Data</h1>
+ 
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Date</th>
+                <th>Condition</th>
+                <th>Low</th>
+                <th>High</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var w in Model.DailyForecasts)
+            {
+                <tr>
+                    <td>@w.Date</td>
+                    <td>@w.Day.IconPhrase</td>
+                    <td>@w.Temperature.Minimum</td>
+                    <td>@w.Temperature.Maximum</td>
+                </tr>
+            }
+
+    </table>
+
+
+<div>
+    <a asp-action="Index">Back to Home</a>
+</div>

@@ -16,7 +16,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Capstone_Proj.ActionFilters;
 using Capstone_Proj.Services;
-using Capstone_Proj.Interfaces;
+using Capstone_Proj.Models;
 
 namespace Capstone_Proj
 {
@@ -44,8 +44,16 @@ namespace Capstone_Proj
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddTransient<LocationService>();
-services.AddTransient<ScheduleService>();
-           services.AddTransient<IWeatherServices, WeatherService>();
+            services.AddTransient<ScheduleService>();
+            services.AddTransient<WeatherService>();
+            services.AddScoped<WeatherForecast>();
+            
+
+            //string uri = Configuration.GetValue<string>("AccuweatherAPI")
+            //services.AddHttpClient("accuweather", c =>
+            //    {
+            //    c.BaseAddress = new Uri(uri);
+            //    );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
