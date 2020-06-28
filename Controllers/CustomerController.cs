@@ -16,6 +16,7 @@ namespace Capstone_Proj.Controllers
         private readonly WeatherService _weather;
         public CustomerController(ApplicationDbContext context, WeatherService weather)
         {
+
             _context = context;
             _weather = weather;
         }
@@ -25,7 +26,6 @@ namespace Capstone_Proj.Controllers
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var loggedInCustomer = await _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefaultAsync();
-            
             return View();
         }
 

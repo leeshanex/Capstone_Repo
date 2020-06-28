@@ -8,16 +8,19 @@ using Microsoft.EntityFrameworkCore;
 using Capstone_Proj.Data;
 using Capstone_Proj.Models;
 using System.Security.Claims;
+using Capstone_Proj.Services;
 
 namespace Capstone_Proj.Controllers
 {
     public class GuideController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly WeatherService _weather;
 
-        public GuideController(ApplicationDbContext context)
+        public GuideController(ApplicationDbContext context, WeatherService weather)
         {
             _context = context;
+            _weather = weather;
         }
 
         // GET: Guide
@@ -171,5 +174,12 @@ namespace Capstone_Proj.Controllers
         {
             return _context.Guides.Any(e => e.GuideId == id);
         }
+
+        public async Task<IActionResult> WeatherPartial()
+        {
+            var weatherForecast = await _weather.GetWeatherForecast();
+            return View(weatherForecast);
+        }
+
     }
 }
