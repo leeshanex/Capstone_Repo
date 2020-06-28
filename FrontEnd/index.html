@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Fishing Spot Map</title>
+  <style>
+  #map {
+    height:400px;
+    widows: 100%;
+  }
+</style>
+</head>
+<div>
+  <nav class="topnav a: hover">
+    <p><a href="sample_home.html">Home</a></p>
+            <a href="guide_index.html">Guide - Home Page Test</a>
+            <a href="customer_index.html">Customer - Home Page Test</a>
+          </div>
+
+<body>
+  <h1>Fishing Spots</h1>
+  <div id="map"></div>
+<script>
+    function initMap(){
+      var options = {
+        zoom:12,
+        center:{lat:38.5816,lng:-121.4944}
+      }
+    var map = new
+      google.maps.Map(document.getElementById('map'), options);
+      //listen for click on map
+      google.maps.event.addListener(map, 'click', function(event){
+        addMarker({coords:event.latLng});
+      });
+
+var markers = [
+{
+  coords:{lat:38.6058,lng:-121.5035},
+  iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+  content:'<h4>Discovery Park Guides</h4>'
+},
+{
+  coords:{lat:38.7848,lng:-121.6170},
+  iconImage: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+  content:'<h4>Feather/Sac River</h4> - Verona'
+},
+{
+  coords:{lat:38.5911,lng:-121.5106},
+  iconImage: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+  content:'<h4>Sacrmento River - Broderick</h4>'
+}
+];
+
+for(var i = 0;i < markers.length;i++){
+  addMarker(markers[i]);
+}
+
+  function addMarker(props){
+    var marker = new google.maps.Marker({
+      position:props.coords,
+      map:map,
+      //icon:props.iconImage
+  });
+
+  if(props.iconImage){
+    marker.setIcon(props.iconImage);
+    }
+
+    if(props.content){
+      var infoWindow = new google.maps.InfoWindow({
+        content:props.content
+    });
+    marker.addListener('click', function(){
+        infoWindow.open(map, marker);
+    });
+  }
+ }
+}
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJ6fqouu8jpnXGUqQDxWugPXCBMrD41wc&callback=initMap">
+    </script>
+</body>
+</html>
