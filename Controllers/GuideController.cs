@@ -16,7 +16,7 @@ namespace Capstone_Proj.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly WeatherService _weather;
-
+        
         public GuideController(ApplicationDbContext context, WeatherService weather)
         {
             _context = context;
@@ -26,6 +26,7 @@ namespace Capstone_Proj.Controllers
         // GET: Guide
         public async Task<IActionResult> Index()
         {
+            
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var loggedInGuide = await _context.Guides.Where(c => c.IdentityUserId == userId).SingleOrDefaultAsync();
 
@@ -178,7 +179,13 @@ namespace Capstone_Proj.Controllers
         public async Task<IActionResult> WeatherPartial()
         {
             var weatherForecast = await _weather.GetWeatherForecast();
-            return View(weatherForecast);
+            return PartialView("WeatherPartial", weatherForecast);
+        }
+
+        public async Task<IActionResult> PostalPartial()
+        {
+            var weatherLocation = await _weather.GetWeatherLocation();
+            return View(weatherLocation);
         }
 
     }

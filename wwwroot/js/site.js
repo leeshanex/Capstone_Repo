@@ -1,4 +1,20 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function getWeatherForecast(selectFiveDay) {
+    $.ajax({
+        url: "/Guide/WeatherPartial",
+        type: 'GET',
+        data: { DailyForecast: selectFiveDay },
+        succes: function (data) {
+            jQuery("#weatherForecast").html(data);
+        },
+        error: function (error) {
+            alert("Error: Please try again.")
+        }
+    });
+}
 
-// Write your JavaScript code.
+jQuery(document).ready(function () {
+    jQuery("#fiveDayForecast").change(function (index) {
+        var selectFiveDay = $(this).val();
+        getWeatherForecast(selectFiveDay);
+    });
+});

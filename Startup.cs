@@ -47,6 +47,7 @@ namespace Capstone_Proj
             services.AddTransient<ScheduleService>();
             services.AddTransient<WeatherService>();
             services.AddScoped<WeatherForecast>();
+            services.AddScoped<PostalCodeSearch>();
             
 
             //string uri = Configuration.GetValue<string>("AccuweatherAPI")

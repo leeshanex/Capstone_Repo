@@ -1,5 +1,6 @@
 ﻿using Capstone_Proj.APIKeys;
 using Capstone_Proj.Models;
+using Microsoft.Graph;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,28 @@ namespace Capstone_Proj.Services
                 WeatherForecast forecast = JsonConvert.DeserializeObject<WeatherForecast>(json);
                 
                 return forecast;
+            }
+            else
+            {
+                return (null);
+            }
+        }
+
+        public async Task<PostalCodeSearch> GetWeatherLocation()
+        {
+            string userInput = "95833";
+            string q = userInput;
+            string url = $"http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey={ApiKeys.OpenWeatherKey}&q={q}";
+            HttpClient client = new HttpClient();
+
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                PostalCodeSearch postalCodeSearch = JsonConvert.DeserializeObject<PostalCodeSearch>(json);
+
+                return postalCodeSearch;
             }
             else
             {

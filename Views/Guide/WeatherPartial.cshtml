@@ -1,4 +1,33 @@
-﻿@using Capstone_Proj.Models
-@inject WeatherForecast forecast
+﻿@model Capstone_Proj.Models.WeatherForecast
 
- 
+
+<h4>5 Day Weather Forecast</h4>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            @*<partial name="PostalPartial" />*@
+            <th>Date</th>
+            <th>Condition</th>
+            <th>Low</th>
+            <th>High</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var w in Model.DailyForecasts)
+        {
+            <tr>
+                <td>@w.Date.DayOfWeek @w.Date.Date</td>
+                <td>@w.Day.IconPhrase</td>
+                <td>@w.Temperature.Minimum.Value°@w.Temperature.Minimum.Unit </td>
+                <td>@w.Temperature.Maximum.Value°@w.Temperature.Maximum.Unit</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<div>
+    <a asp-action="PostalPartial">Location</a>
+</div>
+
+<script src="~/js/site.js" asp-append-version="true"></script>
