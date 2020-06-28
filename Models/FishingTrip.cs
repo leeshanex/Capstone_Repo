@@ -11,7 +11,14 @@ namespace Capstone_Proj.Models
     {
         [Key]
         public int TripId { get; set; }
+
+        [Display(Name = "Trip Date")]
+        [DataType(DataType.Date)]
+        public DateTime TripDate { get; set; }
+
+        [DataType(DataType.ImageUrl)]
         public string TripPhoto { get; set; }
+
         public string TripHistory { get; set; }
 
         [ForeignKey("Guide")]
