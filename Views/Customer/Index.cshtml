@@ -7,16 +7,27 @@
 
 <h1>Index</h1>
 
+<h2>Profile Page</h2>
+<body>
+    <div id="profile picture">
+
+        <p>Upload a picture</p>
+    </div>
+
+    <form action="\Index">
+        <input type="file" id="myFile" name="">
+        <input type="submit">
+    </form>
+    <p>
+        <a href="Guide\Index" class="notification float-md-right">
+            <span class="fa fa-envelope-o" style="font-size:24px"></span>
+            <span class="badge">2</span>
+        </a>
+    </p>
+</body>
 <p>
     <a asp-action="Create">Create New</a>
-    <a asp-action="WeatherForecast">5 Day Weather Forecast</a>
+    <a class="float-md-right" asp-action="WeatherForecast">5 Day Weather Forecast</a>
     @*<partial name="WeatherForecast" />*@
 </p>
 
-<table class="table">
-    <thead>
-    
-    </thead>
-    <tbody>
-    </tbody>
-</table>
