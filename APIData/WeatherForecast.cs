@@ -2,13 +2,13 @@
 
 namespace Capstone_Proj.Models
 {
-
+    [Keyless]
     public class WeatherForecast
     {
         [Keyless]
         public Dailyforecast[] DailyForecasts { get; set; }
     }
-
+    [Keyless]
     public class Dailyforecast
     {
         [Keyless]

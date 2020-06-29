@@ -156,5 +156,16 @@ namespace Capstone_Proj.Controllers
         {
             return _context.Spots.Any(e => e.AreaId == id);
         }
+
+        
+        public async Task<IActionResult> SearchView()
+        {
+            
+            return View();
+        }
+        public async Task<IActionResult> PublicProfileView()
+        {
+            return View();
+        }
     }
 }

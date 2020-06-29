@@ -1,12 +1,119 @@
 ﻿@model Capstone_Proj.Models.WeatherForecast
+@{
+    ViewData["WeatherForecast"] = "DailyForecasts";
+}
+<style>
+    .forecastwidget {
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+        font-size: 14px;
+        background-color: #ffffff;
+        margin: 10px;
+        border-radius: 7px;
+    }
 
+        /*//basic days rules - used for both horizontal and vertical layout*/
+        .forecastwidget .days {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            flex: 1;
+            overflow: hidden;
+        }
+
+            /*//vertical layout overrides the orientation of the days*/
+            .forecastwidget .days.vertical {
+                flex-direction: column;
+                font-size: 1.2em;
+            }
+
+            .forecastwidget .days .day {
+                display: grid;
+                grid-template-columns: 50% 50%;
+                justify-content: center;
+                align-items: center;
+                padding: 0px 5px;
+                font-size: 0.9em;
+                justify-items: center;
+                grid-gap: 1px;
+            }
+
+                /*//most forecast elements take up two columns*/
+                .forecastwidget .days .day * {
+                    grid-column: span 2;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                /*//maximum and minimum elements are arrange side by side*/
+                .forecastwidget .days .day .maxt {
+                    grid-column: 1;
+                }
+
+                .forecastwidget .days .day .mint {
+                    grid-column: 2;
+                }
+
+        .forecastwidget .location {
+            font-size: 1em;
+            font-weight: bold;
+            flex: 0;
+        }
+
+        .forecastwidget .footer {
+            font-size: 0.7em;
+            color: darkgrey;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .forecastwidget .days .day .date {
+            color: darkgrey;
+            font-size: 0.9em;
+            white-space: nowrap;
+        }
+
+
+        .forecastwidget .days .day:not(:last-child) {
+            border-right: 1px solid darkgray;
+        }
+
+        .forecastwidget .days.vertical .day:not(:last-child) {
+            border-right: none;
+            border-bottom: 1px solid darkgray;
+        }
+
+        .forecastwidget .days .day .conditions {
+            display: none;
+            color: darkgrey;
+            font-size: 0.9em;
+        }
+
+        .forecastwidget .days.vertical .day .conditions {
+            display: block;
+        }
+
+        .forecastwidget .days .day .maxt {
+            font-weight: bold;
+        }
+
+        .forecastwidget .days .day .mint {
+            font-size: 0.9em;
+            color: darkgrey;
+        }
+
+        .forecastwidget .days .day .hidden {
+            visibility: hidden;
+        }
+</style>
 
 <h4>5 Day Weather Forecast</h4>
 
-<table class="table table-striped">
+<table class="table-striped">
     <thead class="thead-dark">
         <tr>
-            @*<partial name="PostalPartial" />*@
             <th>Date</th>
             <th>Condition</th>
             <th>Low</th>
@@ -29,5 +136,28 @@
 <div>
     <a asp-action="PostalPartial">Location</a>
 </div>
+
+<div class="weatherWidget"></div>
+
+<script>
+    window.weatherWidgetConfig = window.weatherWidgetConfig || [];
+    window.weatherWidgetConfig.push({
+        selector: ".weatherWidget",
+        apiKey: "PUBLIC_WIDGET_KEY", //lots of usage? Sign up for your personal key
+        location: "Sacramento, CA", //enter an addres
+        unitGroup: "us", //"us" or "metric"
+        forecastDays: 5, //how many days forecast to show
+        title: "Sacramento, CA", //optional title to show in the
+        showTitle: true,
+        showConditions: true
+    });
+
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://www.visualcrossing.com/widgets/forecast-simple/weather-forecast-widget-simple.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
 
 <script src="~/js/site.js" asp-append-version="true"></script>

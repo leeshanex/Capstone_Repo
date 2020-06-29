@@ -16,15 +16,7 @@ namespace Capstone_Proj.Data
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
-            builder.Entity<IdentityRole>()
-                .HasData(
-                new IdentityRole
-                {
-                    Name = "Admin",
-                    NormalizedName = "ADMIN"
-                }
-                );
+
             base.OnModelCreating(builder);
             builder.Entity<IdentityRole>()
                 .HasData(
@@ -43,6 +35,13 @@ namespace Capstone_Proj.Data
                     NormalizedName = "CUSTOMER"
                 }
                 );
+            base.OnModelCreating(builder);
+            builder.Entity<WeatherForecast>(daily =>
+            {
+                daily.HasNoKey();
+            });
+        
+
         }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Guide> Guides { get; set; }

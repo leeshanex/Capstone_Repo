@@ -1,32 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "SearchView";
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Fishing Spot Map</title>
-  <style>
-  #map {
-    height:400px;
-    width: 800px;
-    widows: 100%;
-  }
-  .checked {
-           color: orange;
-       }
-</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fishing Spot Map</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 800px;
+            widows: 100%;
+        }
+        .checked {
+            color: orange;
+        }
+    </style>
 </head>
-<div>
-  <nav class="topnav a: hover">
-    <p><a href="sample_home.html">Home</a></p>
-            <a href="guide_index.html">Guide - Home Page Test</a>
-            <a href="customer_index.html">Customer - Home Page Test</a>
-          </div>
 
 <body>
-  <h1>Fishing Spots</h1>
-  <div id="map"></div>
-<script>
+    <h1>Fishing Spots</h1>
+    <div id="map"></div>
+    <script>
     function initMap(){
       var options = {
         zoom:12,
@@ -43,19 +42,20 @@ var markers = [
 {
   coords:{lat:38.6058,lng:-121.5035},
   iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-  content:'<h4>Discovery Park Guides</h4>'+
-        '<div id="content">'+
-    '<span class= "fa fa-star checked"></span>'+
-'<span class="fa fa-star checked"></span>'+
-'<span class="fa fa-star checked"></span>'+
-'<span class="fa fa-star checked"></span>'+
-        '<span class="fa fa-star"></span>' +
-        '</div>',
+        content: '<h4>Discovery Park - Sacramento/American River</h4>'
+            +
+            '<div id="content">' +
+            '<span class= "fa fa-star checked"></span>' +
+            '<span class="fa fa-star checked"></span>' +
+            '<span class="fa fa-star checked"></span>' +
+            '<span class="fa fa-star checked"></span>' +
+            '<span class="fa fa-star"></span>' +
+            '</div>',
 },
 {
   coords:{lat:38.7848,lng:-121.6170},
   iconImage: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-  content:'<h4>Feather/Sac River</h4> - Verona' +
+    content: '<h4>Feather/Sac River - Verona Marina</h4>' +
         '<div id="content">' +
     '<span class= "fa fa-star checked"></span>'+
 '<span class="fa fa-star checked"></span>'+
@@ -67,12 +67,13 @@ var markers = [
 {
   coords:{lat:38.5911,lng:-121.5106},
   iconImage: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-  content:'<h4>Sacrmento River - Broderick</h4>' +
+    content: '<h4>Sacrmento River - Broderick</h4>'
+        +
         '<div id="content">' +
-    '<span class= "fa fa-star checked"></span>'+
-'<span class="fa fa-star checked"></span>'+
-'<span class="fa fa-star checked"></span>'+
-'<span class="fa fa-star checked"></span>'+
+        '<span class= "fa fa-star checked"></span>' +
+        '<span class="fa fa-star checked"></span>' +
+        '<span class="fa fa-star checked"></span>' +
+        '<span class="fa fa-star checked"></span>' +
         '<span class="fa fa-star"></span>' +
         '</div>',
 }
@@ -86,7 +87,7 @@ for(var i = 0;i < markers.length;i++){
     var marker = new google.maps.Marker({
       position:props.coords,
       map:map,
-      //icon:props.iconImage
+      
   });
 
   if(props.iconImage){
@@ -103,9 +104,9 @@ for(var i = 0;i < markers.length;i++){
   }
  }
 }
-</script>
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJ6fqouu8jpnXGUqQDxWugPXCBMrD41wc&callback=initMap">
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJ6fqouu8jpnXGUqQDxWugPXCBMrD41wc&callback=initMap">
     </script>
 </body>
 </html>

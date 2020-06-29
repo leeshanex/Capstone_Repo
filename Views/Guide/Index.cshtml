@@ -1,27 +1,28 @@
-﻿@model IEnumerable<Capstone_Proj.Models.WeatherForecast>
+﻿@model IEnumerable<Capstone_Proj.Models.Guide>
 
 @{
     ViewData["Title"] = "Index";
+    ViewData["WeatherForecast"] = "DailyForecasts";
 }
 
 
 
-    <h1>Index</h1>
+<h1>Index</h1>
 
 
+<div class="container">
+
+    @*<partial name="WeatherPartial" />*@
+
+    <a asp-action="WeatherPartial">Weather</a>
+</div>
+
+
+<footer class="border-top footer text-muted">
     <div class="container">
-        
-        @*<partial name="WeatherPartial"/>*@
-
-        <a asp-action="WeatherPartial">Weather</a>
+        &copy; 2020 - Capstone_Proj - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
     </div>
+</footer>
 
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - Capstone_Proj - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-
-    <script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
 

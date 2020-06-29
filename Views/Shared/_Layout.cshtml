@@ -24,7 +24,8 @@
         .container {
             padding: 64px;
         }
-
+        .container-nav {
+            padding: 0px;
         }
 
         .row:after {
@@ -86,13 +87,17 @@
                 margin: auto;
             }
         }
+    .back-img { 
+            opacity: .99;
+            background-image: url('https://cdn9.dissolve.com/p/D2115_131_193/D2115_131_193_1200.jpg')
+        }
     </style>
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-sm-3" >
-            <div class="container">
+            <div class="container container-nav">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="https://lh3.googleusercontent.com/proxy/fMKI0RHZMyGg1LsHpAh8yZUcTLxd8u5PQK_BDKtEboWsMxeqeozgBiz7MS6KD8VPmILWCadmFLMFk3BG2e9xpkcdlFCNFyv6y74BHQ8xYVQ1-k9Wg9C1wmchex4wmV0Lq5pUnx4yi04tZI0NT7swKCMusRWVs1h8nZOhCmWFpq-iTvUnmT0QtZQuvfig1MAoJpl6KQ4RVpzh3rFhGkLC9ZH9WQteAuCwKWixveVyZ7BxvbjfxoDQoANiPg" alt="Fish" style="width:48px;height:48px"/>N'BUD</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -111,7 +116,7 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
+        <div class="container-nav">
             &copy; 2020 - FISHN'BUD -
             <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

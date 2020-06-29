@@ -18,5 +18,9 @@ namespace Capstone_Proj.Models
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
+
+     [NotMapped]
+        public WeatherForecast GuideForecast { get; set; }
+
     }
 }
