@@ -7,22 +7,33 @@
 
 
 
-<h1>Index</h1>
+<h2>Profile Page</h2>
+<body>
+    <div id="profile picture">
 
+        <p>Upload a picture</p>
+    </div>
 
-<div class="container">
+        <form action="\Index">
+            <input type="file" id="myFile" name="">
+            <input type="submit">
+        </form>
+        <p>
+            <a href="Guide\Index" class="notification float-md-right">
+                <span class="fa fa-envelope-o" style="font-size:24px"></span>
+                <span class="badge">2</span>
+            </a>
+        </p>
+</body>
+
+<div class="float-md-right">
 
     @*<partial name="WeatherPartial" />*@
-
-    <a asp-action="WeatherPartial">Weather</a>
+    <p>
+        <a asp-action="WeatherPartial">Weather</a>
+    </p>
 </div>
 
-
-<footer class="border-top footer text-muted">
-    <div class="container">
-        &copy; 2020 - Capstone_Proj - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-    </div>
-</footer>
 
 <script src="~/js/site.js" asp-append-version="true"></script>
 

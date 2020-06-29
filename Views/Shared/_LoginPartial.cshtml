@@ -2,7 +2,9 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-  
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
     <ul class="navbar-nav">
         @if (SignInManager.IsSignedIn(User))
         {
@@ -14,18 +16,24 @@
                     <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
                 </form>
             </li>
-           
+
         }
         else
         {
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Sign Up</a>
+                <a class="nav-link text-dark" href="https://www.instagram.com/fishn.bud/" target="_blank"><i style="font-size:24px" class="fa" >&#xf16d;</i></a>
             </li>
-            
             <li class="nav-item">
-                
-                        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-                    
+                <a class="nav-link text-dark" href="https://www.facebook.com/Fishnbud-106026984504298" target="_blank"><i style="font-size:24px" class="fa">&#xf082;</i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link font-weight-bold" style="color:gold;" asp-area="Identity" asp-page="/Account/Register">+Sign Up</a>
+            </li>
+
+            <li class="nav-item">
+
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+
             </li>
         }
     </ul>
