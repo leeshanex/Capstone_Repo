@@ -21,4 +21,8 @@
     <Folder Include="Content\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\js\Maps.js" />
+  </ItemGroup>
+
 </Project>
